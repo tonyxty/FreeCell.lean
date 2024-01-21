@@ -30,6 +30,7 @@ def Rank := Fin 13
 structure Card where
   suit : Suit
   rank : Rank
+deriving DecidableEq
 
 @[reducible]
 def Card.color (card : Card) : Color := Color.of card.suit
