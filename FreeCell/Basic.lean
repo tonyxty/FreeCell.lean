@@ -82,17 +82,16 @@ def tryPut (c : Card) (t : To k n) : Option (Layout k n) :=
     else
       .none
   | .foundation =>
-    let j := sorry
-    let h : j < 4 := sorry
+    let j := c.suit
     match c.rank.1 with
     | .zero =>
       if τ.foundations[j] = none then
-        .some { τ with foundations := τ.foundations.set ⟨j, h⟩ (.some c.rank) }
+        .some { τ with foundations := τ.foundations.set j (.some c.rank) }
       else
         .none
     | .succ r =>
       if τ.foundations[j].map Fin.val = .some r then
-        .some { τ with foundations := τ.foundations.set ⟨j, h⟩ (.some c.rank) }
+        .some { τ with foundations := τ.foundations.set j (.some c.rank) }
       else
         .none
   | .cell j =>

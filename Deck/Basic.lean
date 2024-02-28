@@ -1,16 +1,11 @@
 namespace Deck
 
-inductive Suit where
-  | spades : Suit
-  | hearts : Suit
-  | diamonds : Suit
-  | clubs : Suit
-deriving DecidableEq
+abbrev Suit := Fin 4
 
-notation "♠" => Suit.spades
-notation "♥" => Suit.hearts
-notation "♢" => Suit.diamonds
-notation "♣" => Suit.clubs
+notation "♠" => 0
+notation "♥" => 1
+notation "♢" => 2
+notation "♣" => 3
 
 inductive Color where
   | red : Color
@@ -24,8 +19,7 @@ def Color.of (suit : Suit) : Color :=
   | ♢ => .red
   | ♣ => .black
 
-@[reducible]
-def Rank := Fin 13
+abbrev Rank := Fin 13
 
 structure Card where
   suit : Suit
