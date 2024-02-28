@@ -2,3 +2,4 @@
 -- Import modules here that should be built as part of the library.
 import FreeCell.Basic
 import FreeCell.CanBuildOn
+import FreeCell.Moves
