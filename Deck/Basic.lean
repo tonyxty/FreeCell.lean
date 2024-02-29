@@ -38,4 +38,14 @@ instance : ToString Card where
 @[reducible]
 def Card.color (card : Card) : Color := Color.of card.suit
 
+protected def finRange {n : Nat} : List (Fin n) :=
+  match n with
+  | .zero => []
+  | n@(.succ _) => List.range n |>.map Fin.ofNat
+
+def suits : List Suit := Deck.finRange
+def ranks : List Rank := Deck.finRange
+def deck : List Card := suits.bind λ s => ranks.map <| Card.mk s
+
+theorem deck_length : deck.length = 52 := rfl
 end Deck
