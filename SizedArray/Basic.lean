@@ -5,7 +5,9 @@ def SizedArray (α : Type u) (n : Nat) := { a : Array α // a.size = n }
 namespace SizedArray
 variable {α : Type u}
 
-def replicate (n : Nat) (v : α) : SizedArray α n := ⟨ Array.mkArray n v, Array.size_mkArray n v ⟩
+def mkEmpty (c : Nat) : SizedArray α 0 := ⟨ .mkEmpty c, rfl ⟩
+
+def replicate {n : Nat} (v : α) : SizedArray α n := ⟨ .mkArray n v, Array.size_mkArray n v ⟩
 
 variable {n : Nat}
 
@@ -17,5 +19,8 @@ def set (a : SizedArray α n) (i : Fin n) (v : α) : SizedArray α n :=
 
 instance : GetElem (SizedArray α n) Nat α fun _ i ↦ i < n where
   getElem a i h := a.1.get (a.castIndex ⟨i, h⟩)
+
+def push (a : SizedArray α n) (v : α) : SizedArray α n.succ :=
+  ⟨ a.1.push v, (a.1.size_push _).trans (congrArg Nat.succ a.2) ⟩
 
 end SizedArray
