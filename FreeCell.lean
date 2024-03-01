@@ -3,3 +3,4 @@
 import FreeCell.Basic
 import FreeCell.CanBuildOn
 import FreeCell.Moves
+import FreeCell.Parse

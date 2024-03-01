@@ -27,8 +27,7 @@ def validate : Pos k n → Option (From τ)
   | .cell i => if h : τ.cells[i] ≠ .none then .some <| .cell i h else .none
   | .foundation => .none
 
-def take (f : From τ) : Card × Layout k n :=
-  match f with
+def take : From τ → Card × Layout k n
   | .column i h =>
     let column := τ.columns[i]
     -- This should be called Array.back
@@ -40,8 +39,7 @@ def take (f : From τ) : Card × Layout k n :=
       | .none => by contradiction
     ⟨ card, { τ with cells := τ.cells.set i .none } ⟩
 
-def tryPut (c : Card) (t : Pos k n) : Option (Layout k n) :=
-  match t with
+def tryPut (c : Card) : Pos k n → Option (Layout k n)
   | .column j =>
     let column := τ.columns[j]
     if CanBuildOn c column.back? then
