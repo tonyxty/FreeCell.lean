@@ -7,7 +7,8 @@ Defines and implements valid single-step moves
 
 open Deck
 
-namespace Layout
+namespace FreeCell.Layout
+
 variable {k n : Nat}
 variable (τ : Layout k n)
 
@@ -69,4 +70,4 @@ def move (f t : Pos k n) : Option (Layout k n) := do
   let (card, τ') := τ.take <| ← τ.validate f
   τ'.tryPut card t
 
-end Layout
+end FreeCell.Layout

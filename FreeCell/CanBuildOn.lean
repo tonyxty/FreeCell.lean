@@ -4,6 +4,8 @@ import Deck.Basic
 Defines the "CanBuildOn" relation, i.e., when a card can build upon another card, and show that it is decidable.
 -/
 
+namespace FreeCell
+
 open Deck
 
 @[reducible]
@@ -35,3 +37,5 @@ instance : Decidable (CanBuildOn c c') :=
   match h : canBuildOn c c' with
   | true => isTrue (of_canBuildOn_eq_true h)
   | false => isFalse (of_canBuildOn_eq_false h)
+
+end FreeCell

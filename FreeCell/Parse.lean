@@ -6,7 +6,7 @@ Parse a string into a Pos or a From
 
 variable {k n : Nat}
 
-def Layout.Pos.parse (s : String) : Option (Layout.Pos k n) := do
+def FreeCell.Layout.Pos.parse (s : String) : Option (FreeCell.Layout.Pos k n) := do
   let c ← s.get? 0
   if c == 'f' then
     return .foundation

@@ -9,6 +9,8 @@ Defines FreeCell layouts
 open Deck
 open Lean
 
+namespace FreeCell
+
 abbrev Column := Array Card
 
 structure Layout (c n : Nat) where
@@ -42,3 +44,5 @@ instance (c n : Nat) : ToJson (Layout c n) where
     ("cells", toJson <| layout.cells.1),
     ("foundations", toJson <| layout.foundations.1)
   ]
+
+end FreeCell

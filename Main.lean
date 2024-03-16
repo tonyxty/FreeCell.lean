@@ -2,7 +2,7 @@ import Deck
 import FreeCell
 import Lean.Data.Json
 
-open Lean Deck
+open Lean Deck FreeCell
 
 def main : IO Unit := do
   let rng ← IO.stdGenRef.get
