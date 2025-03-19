@@ -1,5 +1,4 @@
 import Lean.Data.Json
-import SizedArray.Basic
 import Deck.Basic
 
 /-!
@@ -9,19 +8,23 @@ Defines FreeCell layouts
 open Deck
 open Lean
 
+universe u
+def Vector.replicate {α : Type u} {n : Nat} (x : α) : Vector α n :=
+  ⟨ .ofFn (n := n) fun _ => x, Array.size_ofFn _ ⟩
+
 namespace FreeCell
 
 abbrev Column := Array Card
 
 structure Layout (c n : Nat) where
-  columns : SizedArray Column c
-  cells : SizedArray (Option Card) n
-  foundations : SizedArray (Option Rank) 4
+  columns : Vector Column c
+  cells : Vector (Option Card) n
+  foundations : Vector (Option Rank) 4
 
-def splitEvenly {α : Type} {n : Nat} (a : Array α) : SizedArray (Array α) n :=
+def splitEvenly {α : Type} {n : Nat} (a : Array α) : Vector (Array α) n :=
   let k := a.size / n
   let m := a.size % n
-  let rec go (i p : Nat) : SizedArray (Array α) i :=
+  let rec go (i p : Nat) : Vector (Array α) i :=
     match i with
     | .zero => .mkEmpty n
     | .succ i =>

@@ -11,7 +11,7 @@ open Deck
 @[reducible]
 def CanBuildOn' (c c' : Card) : Prop := c.rank = c'.rank + 1 ∧ c.color ≠ c'.color
 
-inductive CanBuildOn : Card → Option Card → Prop :=
+inductive CanBuildOn : Card → Option Card → Prop where
   | none : ∀ c, CanBuildOn c none
   | some : ∀ {c c'}, CanBuildOn' c c' → CanBuildOn c (.some c')
 

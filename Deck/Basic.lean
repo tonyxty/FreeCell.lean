@@ -8,7 +8,7 @@ notation "♦" => 2
 notation "♣" => 3
 
 instance : ToString Suit where
-  toString s := .mk [#['♠', '♥', '♦', '♣'].get s]
+  toString s := .mk [#['♠', '♥', '♦', '♣'][s]]
 
 inductive Color where
   | red : Color
@@ -30,22 +30,17 @@ structure Card where
 deriving DecidableEq
 
 instance : ToString Rank where
-  toString r := .mk [#['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'].get r]
+  toString r := .mk [#['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'][r]]
 
 instance : ToString Card where
   toString c := toString c.suit ++ toString c.rank
 
 @[reducible]
-def Card.color (card : Card) : Color := Color.of card.suit
+def Card.color (card : Card) : Color := .of card.suit
 
-protected def finRange {n : Nat} : List (Fin n) :=
-  match n with
-  | .zero => []
-  | n@(.succ _) => List.range n |>.map Fin.ofNat
-
-def suits : List Suit := Deck.finRange
-def ranks : List Rank := Deck.finRange
-def deck : List Card := suits.bind λ s => ranks.map <| Card.mk s
+def suits : List Suit := .ofFn id
+def ranks : List Rank := .ofFn id
+def deck : List Card := suits.flatMap fun s => ranks.map <| .mk s
 
 theorem deck_length : deck.length = 52 := rfl
 end Deck

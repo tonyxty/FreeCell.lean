@@ -31,8 +31,7 @@ def validate : Pos k n → Option (From τ)
 def take : From τ → Card × Layout k n
   | .column i h =>
     let column := τ.columns[i]
-    -- This should be called Array.back
-    let card := column.get ⟨column.size.pred, Nat.pred_lt (Nat.ne_of_lt h).symm⟩
+    let card := column.back
     ⟨ card, { τ with columns := τ.columns.set i column.pop } ⟩
   | .cell i h =>
     let card := match h' : τ.cells[i] with

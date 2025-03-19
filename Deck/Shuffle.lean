@@ -5,5 +5,5 @@ def shuffle {g : Type} [RandomGen g] {α : Type} (rng : g) (a : Array α) : Arra
   for i in [:n] do
     let res := randNat r 0 (n - 1 - i)
     r := res.2
-    a := a.swap! i <| i + res.1
+    a := a.swapIfInBounds i (i + res.1)
   return (a, r)

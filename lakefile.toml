@@ -1,0 +1,16 @@
+name = "freecell"
+defaultTargets = ["FreeCell"]
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+
+[[lean_lib]]
+name = "Deck"
+
+[[lean_lib]]
+name = "FreeCell"
+
+[[lean_exe]]
+name = "FreeCell"
+root = "Main"
